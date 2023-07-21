@@ -1,0 +1,338 @@
+.app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/flag-spain.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.frosted-glass {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.popup-window {
+  position: relative;
+  height: 30rem;
+  min-width: 30rem;
+  // overflow-y: scroll;
+
+  @media only screen and (max-width: 37.5em) {
+    max-width: 100%;
+    min-width: unset;
+  }
+
+  // overflow: hidden;
+
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  h1 {
+    text-align: center;
+  }
+  .popup-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .popup-container {
+    flex-grow: 1;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: max-content;
+    gap: 0.5rem;
+
+    overflow-y: scroll;
+
+    .grid-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      padding-block: 0.5rem;
+
+      background-color: #2b4162;
+      border-radius: 5px;
+
+      font-size: 1rem;
+      color: white;
+
+      text-decoration: none;
+
+      &.inverse-color {
+        background-color: transparent;
+        color: black;
+        border: 1px solid #2b4162;
+      }
+
+      & > * {
+        margin-block: 0.5rem;
+      }
+    }
+    button.grid-card {
+      border: 2px solid #2b4162;
+      cursor: pointer;
+
+      transition: all 0.2s ease-in;
+
+      &:hover {
+        border: 2px solid white;
+        filter: hue-rotate(20deg);
+      }
+      &.selected {
+        background-color: #c83e4d !important;
+        &.green {
+          background-color: #73a580 !important;
+        }
+      }
+    }
+  }
+}
+
+.overview-page {
+  .overview-container {
+    flex-grow: 1;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .card-deck {
+    height: max-content;
+    padding: 1rem;
+    border-radius: 5px;
+
+    background-color: #2b4162;
+
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+
+    p {
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover > p {
+      transform: scale(1.1);
+    }
+    &:active {
+      filter: brightness(90%);
+    }
+  }
+}
+
+.flash-cards {
+  .flashcard-clickable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    flex-grow: 1;
+  }
+  div {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    p {
+      width: 100%;
+      padding-block: 1rem;
+
+      text-align: center;
+
+      font-size: 2.6rem;
+      font-weight: 200;
+      text-transform: capitalize;
+
+      border-bottom: 1px solid #2b4162;
+      // transition: all 0.3s ease-in;
+    }
+  }
+}
+.all-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: max-content;
+  gap: 0.5rem;
+  overflow-y: scroll;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 4.5rem;
+
+  background-color: #2b4162;
+  border-radius: 5px;
+
+  color: white;
+
+  p {
+    margin-block: 0.25rem;
+  }
+}
+.newcard-page {
+  .new-card-container {
+    flex-grow: 1;
+  }
+  h1 {
+    width: max-content;
+    margin: 1rem auto;
+    position: relative;
+    .new-card-amount {
+      position: absolute;
+      right: -1.4rem;
+      top: 0;
+      width: 1.4rem;
+      height: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 0.8rem;
+      color: white;
+      background-color: #c83e4d;
+      border-radius: 50%;
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  // grid-template-columns: repeat(3, 1fr);
+  margin-block: 2rem 0rem;
+  gap: 1rem;
+
+  & button,
+  & a {
+    width: 100%;
+  }
+
+  button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: filter 0.3s ease;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #2b4162;
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: grey !important;
+    }
+  }
+  button.green {
+    background-color: #73a580;
+  }
+  button.red {
+    background-color: #c83e4d;
+  }
+
+  button:hover {
+    filter: brightness(90%);
+  }
+
+  button:active {
+    background-color: #ccc;
+    transform: translateY(1px);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.back-button,
+.menu-button {
+  position: absolute;
+  top: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  background-color: #2b4162;
+  color: #fff;
+  border: none;
+}
+.back-button {
+  left: 1rem;
+}
+.menu-button {
+  right: 1rem;
+}
+
+.back-button:hover,
+.menu-button:hover {
+  transform: scale(1.1);
+}
+
+.back-button:active,
+.menu-button:active {
+  transform: scale(0.9);
+}
+
+form {
+  fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+
+    input,
+    textarea {
+      padding: 0.6rem;
+      border: 2px solid #2b4162;
+      border-radius: 5px;
+    }
+    textarea {
+      height: 8rem;
+      resize: vertical;
+    }
+    label {
+      font-size: 1.2rem;
+      color: #2b4162;
+      font-weight: 600;
+    }
+  }
+}

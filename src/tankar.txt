@@ -1,0 +1,19 @@
+Easy                +3p
+Normal              +2p
+Hard                +1p
+Skip                -2p
+
+interval < 1d       +0p
+1d < interval < 3d  +1p
+3d < interval < 7d  +3p
+7d < interval 14d   +5p
+interval > 14d      +10p
+
+Formula             points*retention-rate-loss(R)
+R                   e^(days/20)
+
+Word learned at     30p
+Those words will not be visible anymore
+
+Sort so that words with least points in deck are always in front
+
