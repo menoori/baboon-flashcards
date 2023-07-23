@@ -18,7 +18,7 @@ import FlashCardsPage from "./pages/FlashCardsPage";
 import NewCardPage from "./pages/NewCardPage";
 import EditDeckPage from "./pages/EditDeckPage";
 import EditCardPage from "./pages/EditCardPage";
-import EditOverviewPage from "./pages/EditOverviewPage";
+import EditOverviewPage from "./pages/EditOverViewPage";
 import SettingsPage from "./pages/SettingsPage";
 import { Settings } from "./interface/settings_interface";
 import { DateManager } from "./manager/DateManager";
