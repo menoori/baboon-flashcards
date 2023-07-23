@@ -24,21 +24,21 @@ export class LocalStorageManager {
         hide_edit_cards: false,
         point_limit: 30,
         block_time: 6,
-        retentionRate: 20,
+        retention_rate: 20,
       };
       localStorage.setItem(this._settingId, JSON.stringify(this._settings));
     } else if (
       !settings.hide_edit_cards ||
       !settings.hide_edit_deck ||
       !settings.point_limit ||
-      !settings.retentionRate
+      !settings.retention_rate
     ) {
       this._settings = {
         hide_edit_deck: true,
         hide_edit_cards: false,
         point_limit: 30,
         block_time: 6,
-        retentionRate: 20,
+        retention_rate: 20,
       };
       localStorage.setItem(this._settingId, JSON.stringify(this._settings));
     } else {

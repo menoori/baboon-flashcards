@@ -18,7 +18,7 @@ import FlashCardsPage from "./pages/FlashCardsPage";
 import NewCardPage from "./pages/NewCardPage";
 import EditDeckPage from "./pages/EditDeckPage";
 import EditCardPage from "./pages/EditCardPage";
-import EditOverViewPage from "./pages/EditOverViewPage";
+import EditOverviewPage from "./pages/EditOverviewPage";
 import SettingsPage from "./pages/SettingsPage";
 import { Settings } from "./interface/settings_interface";
 import { DateManager } from "./manager/DateManager";
@@ -42,7 +42,7 @@ export default function Main() {
   const pageId = pathname.split("/")[2];
   const POINTLIMIT = settings.point_limit;
   const BLOCKTIME = settings.block_time;
-  const RETENTIONRATE = settings.retentionRate;
+  const RETENTIONRATE = settings.retention_rate;
 
   const handleBack = () => {
     window.history.back();
@@ -119,7 +119,7 @@ export default function Main() {
           <Route
             path="edit"
             element={
-              <EditOverViewPage updateData={handleUpdateAllData} data={data} />
+              <EditOverviewPage updateData={handleUpdateAllData} data={data} />
             }
           />
           {data.map((deck) => {

@@ -5,7 +5,7 @@ interface EditOverViewPageProps {
   data: FlashCardDeck[];
   updateData: (filteredDecks: FlashCardDeck[]) => void;
 }
-export default function EditOverViewPage(props: EditOverViewPageProps) {
+export default function EditOverviewPage(props: EditOverViewPageProps) {
   const [selectedDecks, setSelectedDecks] = useState(
     props.data.map((deck) => {
       return { deckId: deck.id, isSelected: false };
@@ -64,7 +64,7 @@ export default function EditOverViewPage(props: EditOverViewPageProps) {
           return (
             <button
               key={deck.id}
-              className="grid-card"
+              className="grid-card inverse-color"
               onClick={() => handleSelectedDeck(deck.id)}
               id={deck.id}
             >

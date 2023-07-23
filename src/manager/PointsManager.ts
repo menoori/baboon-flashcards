@@ -20,18 +20,29 @@ export class PointsManager {
     let copyCard = { ...card };
     const currentTime = Date.now();
 
-    // if word solved within block time, leave points as is
+    // if word solved within block time, leave points as is and update seenLast
+    console.log(
+      this._DM.getDifference(currentTime, copyCard.seenLast!, "hours")
+    );
+
+    console.log(this._blockTime);
+
     if (
-      copyCard.seenLast &&
+      copyCard.seenLast !== undefined &&
       this._DM.getDifference(currentTime, copyCard.seenLast, "hours") <
         this._blockTime
     ) {
-      return { ...copyCard, seenLast: currentTime };
+      return { ...copyCard, seenLast: Date.now() };
     }
 
-    // some might be null
-    if (copyCard.points === null) {
-      return (copyCard = { ...copyCard, points: 0, seenLast: currentTime });
+    // If first time seeing this card add a seenLast property
+    if (copyCard.seenLast === undefined) {
+      copyCard = { ...copyCard, seenLast: Date.now() };
+    }
+
+    // some cards might have null points
+    else if (copyCard.points === null) {
+      copyCard = { ...copyCard, points: 0 };
     }
 
     // Remove points based on retention rate

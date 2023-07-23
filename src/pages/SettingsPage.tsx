@@ -23,12 +23,13 @@ export default function SettingsPage(props: SettingsPageProps) {
     }
   };
 
-  const handleChangeLimit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSettings({ ...settings, point_limit: Number(e.target.value) });
-  };
-
-  const handleChangeRetention = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSettings({ ...settings, retentionRate: Number(e.target.value) });
+  const handleChangeNumberSetting = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSettings((prevSettings) => ({
+      ...prevSettings,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSaveSettings = () => {
@@ -57,23 +58,33 @@ export default function SettingsPage(props: SettingsPageProps) {
         </button>
         <form>
           <fieldset>
-            <label htmlFor="point-limit">Point Limit</label>
+            <label htmlFor="point_limit">Point Limit</label>
             <input
               type="text"
-              id="point-limit"
-              name="point-limit"
+              id="point_limit"
+              name="point_limit"
               value={settings.point_limit}
-              onChange={(e) => handleChangeLimit(e)}
+              onChange={(e) => handleChangeNumberSetting(e)}
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="retention-rate">Retention Rate</label>
+            <label htmlFor="retention_rate">Retention Rate</label>
             <input
               type="text"
-              id="retention-rate"
-              name="retention-rate"
-              value={settings.retentionRate}
-              onChange={(e) => handleChangeRetention(e)}
+              id="retention_rate"
+              name="retention_rate"
+              value={settings.retention_rate}
+              onChange={(e) => handleChangeNumberSetting(e)}
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="block_time">Block Time (h)</label>
+            <input
+              type="text"
+              id="block_time"
+              name="block_time"
+              value={settings.block_time}
+              onChange={(e) => handleChangeNumberSetting(e)}
             />
           </fieldset>
         </form>

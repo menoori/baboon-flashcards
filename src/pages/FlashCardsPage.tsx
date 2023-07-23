@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlashCardDeck } from "../interface/data_interface";
 import { PointsManager } from "../manager/PointsManager";
 
@@ -17,14 +17,7 @@ interface FlashCardsPageProps {
 
 export default function FlashCardsPage(props: FlashCardsPageProps) {
   const [cards, setCards] = useState(
-    props.deck.cards
-      .filter((card) => card.points < props.POINTLIMIT)
-      .filter(
-        (card) =>
-          card.seenLast &&
-          props.getDifference(card.seenLast, Date.now(), "hours") >
-            props.BLOCKTIME
-      )
+    props.deck.cards.filter((card) => card.points < props.POINTLIMIT)
   );
   const [dataPosition, setDataPosition] = useState(0);
   const [showCard, setShowCard] = useState(false);
@@ -35,30 +28,30 @@ export default function FlashCardsPage(props: FlashCardsPageProps) {
     props.RETENTIONRATE
   );
 
-  // useEffect(() => {
-  //   const handleKeyDown = (event: KeyboardEvent) => {
-  //     if (
-  //       (event.key === " " && !showCard) ||
-  //       (event.code === "Space" && !showCard)
-  //     ) {
-  //       event.preventDefault();
-  //       setShowCard(true);
-  //     } else if (event.key === "x" && showCard) {
-  //       handleNextCard(-2);
-  //     } else if (event.key === "q") {
-  //       handleNextCard(3);
-  //     } else if (event.key === "w") {
-  //       handleNextCard(2);
-  //     } else if (event.key === "e") {
-  //       handleNextCard(1);
-  //     }
-  //   };
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        (event.key === " " && !showCard) ||
+        (event.code === "Space" && !showCard)
+      ) {
+        event.preventDefault();
+        setShowCard(true);
+      } else if (event.key === "x" && showCard) {
+        handleNextCard(-2);
+      } else if (event.key === "q") {
+        handleNextCard(3);
+      } else if (event.key === "w") {
+        handleNextCard(2);
+      } else if (event.key === "e") {
+        handleNextCard(1);
+      }
+    };
 
-  //   document.addEventListener("keydown", handleKeyDown);
-  //   return () => {
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, [showCard]);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showCard]);
 
   const handleNextCard = (points: -2 | 1 | 2 | 3) => {
     if (!showCard) return;
@@ -68,14 +61,9 @@ export default function FlashCardsPage(props: FlashCardsPageProps) {
     );
 
     // Hide cards than are above point limit and under block time limit
-    const cardsLessThanLimit = cardsNewPoints
-      .filter((card) => card.points < props.POINTLIMIT)
-      .filter(
-        (card) =>
-          card.seenLast &&
-          props.getDifference(card.seenLast, Date.now(), "hours") >
-            props.BLOCKTIME
-      );
+    const cardsLessThanLimit = cardsNewPoints.filter(
+      (card) => card.points < props.POINTLIMIT
+    );
 
     // sort cards after round finished based on points
     if (dataPosition >= cardsLessThanLimit.length - 1) {
