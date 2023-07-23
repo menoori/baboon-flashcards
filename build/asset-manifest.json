@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.540d52b9.css",
+    "main.js": "/static/js/main.65bcfe78.js",
+    "static/media/flag-spain.jpg": "/static/media/flag-spain.7d7e434b5a945eb08bd2.jpg",
+    "static/media/back.svg": "/static/media/back.6165c02792a63e45c7b764cea4345a5f.svg",
+    "static/media/cog.svg": "/static/media/cog.3766439b454e492991dcfd2caa00f3f1.svg",
+    "index.html": "/index.html",
+    "main.540d52b9.css.map": "/static/css/main.540d52b9.css.map",
+    "main.65bcfe78.js.map": "/static/js/main.65bcfe78.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.540d52b9.css",
+    "static/js/main.65bcfe78.js"
+  ]
+}
