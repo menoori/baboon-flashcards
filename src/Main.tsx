@@ -198,7 +198,6 @@ export default function Main() {
                   updateCard={handleUpdateCard}
                   card={selectedCard}
                   deckId={pageId}
-                  formatDate={DM.getFormattedDate}
                 />
               }
             />

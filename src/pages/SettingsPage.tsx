@@ -60,7 +60,7 @@ export default function SettingsPage(props: SettingsPageProps) {
             <div>Hide edit card button</div>
           </button>
         </div>
-        <div className="grid">
+        <div className="flex">
           <fieldset>
             <label htmlFor="point_limit">Point Limit</label>
             <input
@@ -81,6 +81,8 @@ export default function SettingsPage(props: SettingsPageProps) {
               onChange={(e) => handleChangeSetting(e)}
             />
           </fieldset>
+        </div>
+        <div className="flex">
           <fieldset>
             <label htmlFor="block_time">Block Time (h)</label>
             <input
