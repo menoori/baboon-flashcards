@@ -7,6 +7,7 @@ interface SettingsPageProps {
 }
 export default function SettingsPage(props: SettingsPageProps) {
   const [settings, setSettings] = useState(props.settings);
+
   const handleSelectedSetting = (settingType: string) => {
     switch (settingType) {
       case "lock-decks":
@@ -23,9 +24,8 @@ export default function SettingsPage(props: SettingsPageProps) {
     }
   };
 
-  const handleChangeNumberSetting = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChangeSetting = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     setSettings((prevSettings) => ({
       ...prevSettings,
       [e.target.name]: e.target.value,
@@ -39,24 +39,28 @@ export default function SettingsPage(props: SettingsPageProps) {
   return (
     <div className="edit-page popup-content">
       <h1>Settings</h1>
-      <div className="popup-container grid">
-        <button
-          className={`grid-card green ${settings.hide_edit_deck && "selected"}`}
-          onClick={() => handleSelectedSetting("lock-decks")}
-          id="lock-decks"
-        >
-          <div>Hide edit deck button</div>
-        </button>
-        <button
-          className={`grid-card green ${
-            settings.hide_edit_cards && "selected"
-          }`}
-          onClick={() => handleSelectedSetting("lock-cards")}
-          id="lock-cards"
-        >
-          <div>Hide edit card button</div>
-        </button>
-        <form>
+      <div className="popup-container">
+        <div className="grid two-column">
+          <button
+            className={`grid-card green ${
+              settings.hide_edit_deck && "selected"
+            }`}
+            onClick={() => handleSelectedSetting("lock-decks")}
+            id="lock-decks"
+          >
+            <div>Hide edit deck button</div>
+          </button>
+          <button
+            className={`grid-card green ${
+              settings.hide_edit_cards && "selected"
+            }`}
+            onClick={() => handleSelectedSetting("lock-cards")}
+            id="lock-cards"
+          >
+            <div>Hide edit card button</div>
+          </button>
+        </div>
+        <div className="grid">
           <fieldset>
             <label htmlFor="point_limit">Point Limit</label>
             <input
@@ -64,7 +68,7 @@ export default function SettingsPage(props: SettingsPageProps) {
               id="point_limit"
               name="point_limit"
               value={settings.point_limit}
-              onChange={(e) => handleChangeNumberSetting(e)}
+              onChange={(e) => handleChangeSetting(e)}
             />
           </fieldset>
           <fieldset>
@@ -74,7 +78,7 @@ export default function SettingsPage(props: SettingsPageProps) {
               id="retention_rate"
               name="retention_rate"
               value={settings.retention_rate}
-              onChange={(e) => handleChangeNumberSetting(e)}
+              onChange={(e) => handleChangeSetting(e)}
             />
           </fieldset>
           <fieldset>
@@ -84,10 +88,10 @@ export default function SettingsPage(props: SettingsPageProps) {
               id="block_time"
               name="block_time"
               value={settings.block_time}
-              onChange={(e) => handleChangeNumberSetting(e)}
+              onChange={(e) => handleChangeSetting(e)}
             />
           </fieldset>
-        </form>
+        </div>
       </div>
       <div className="button-container">
         <button onClick={handleSaveSettings} className="green">

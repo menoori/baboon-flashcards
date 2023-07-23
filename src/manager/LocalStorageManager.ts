@@ -31,7 +31,8 @@ export class LocalStorageManager {
       !settings.hide_edit_cards ||
       !settings.hide_edit_deck ||
       !settings.point_limit ||
-      !settings.retention_rate
+      !settings.retention_rate ||
+      !settings.block_time
     ) {
       this._settings = {
         hide_edit_deck: true,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { LocalStorageManager } from "./manager/LocalStorageManager";
 
@@ -40,9 +40,6 @@ export default function Main() {
 
   // const pageName = pathname.split("/")[1];
   const pageId = pathname.split("/")[2];
-  const POINTLIMIT = settings.point_limit;
-  const BLOCKTIME = settings.block_time;
-  const RETENTIONRATE = settings.retention_rate;
 
   const handleBack = () => {
     window.history.back();
@@ -132,7 +129,7 @@ export default function Main() {
                     <DeckPage
                       hide_edit_cards={settings.hide_edit_cards}
                       deck={deck}
-                      POINTLIMIT={POINTLIMIT}
+                      POINTLIMIT={settings.point_limit}
                     />
                   }
                 />
@@ -143,9 +140,9 @@ export default function Main() {
                     <FlashCardsPage
                       deck={deck}
                       updateData={handleUpdateDeckById}
-                      POINTLIMIT={POINTLIMIT}
-                      BLOCKTIME={BLOCKTIME}
-                      RETENTIONRATE={RETENTIONRATE}
+                      POINTLIMIT={settings.point_limit}
+                      BLOCKTIME={settings.block_time}
+                      RETENTIONRATE={settings.retention_rate}
                       getDifference={DM.getDifference}
                     />
                   }
