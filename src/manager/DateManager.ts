@@ -31,7 +31,7 @@ export class DateManager {
   }
 
   getFormattedDate(
-    date: Date,
+    date: Date | number | string,
     format: "YYMMDD" | "YYYY-MM-DD" | "YYMMDD hh:mm:ss" | "hh:mm:ss" | "hh:mm"
   ): string {
     const prepare = new Date(date);

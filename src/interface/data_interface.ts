@@ -7,6 +7,7 @@ export interface FlashCardDeck {
   id: string;
   name: string;
   cards: FlashCard[];
+  stats?: Stat[];
 }
 
 export interface FlashCard {
@@ -17,4 +18,9 @@ export interface FlashCard {
   tags: string[]; // METODO: future content
   points: number;
   seenLast?: number;
+}
+
+export interface Stat {
+  title: string;
+  data: number | string;
 }

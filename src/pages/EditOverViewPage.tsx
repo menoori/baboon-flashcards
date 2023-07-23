@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FlashCardDeck } from "../interface/data_interface";
-import { NavLink } from "react-router-dom";
 
 interface EditOverViewPageProps {
   data: FlashCardDeck[];

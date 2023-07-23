@@ -2,11 +2,13 @@ import React, { useState } from "react";
 
 import { LocalStorageManager } from "./manager/LocalStorageManager";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
-
-import { NavLink, Route, Routes, useLocation } from "react-router-dom";
+import {
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { FlashCard, FlashCardDeck } from "./interface/data_interface";
 import { CONSTANTS } from "./enums";
 import OverViewPage from "./pages/OverviewPage";
@@ -17,18 +19,30 @@ import NewCardPage from "./pages/NewCardPage";
 import EditDeckPage from "./pages/EditDeckPage";
 import EditCardPage from "./pages/EditCardPage";
 import EditOverViewPage from "./pages/EditOverViewPage";
-import AllCardsPage from "./pages/AllCardsPage";
 import SettingsPage from "./pages/SettingsPage";
 import { Settings } from "./interface/settings_interface";
+import { DateManager } from "./manager/DateManager";
+import { AnimationManager } from "./manager/AnimationManager";
+import cogIcon from "./img/cog.svg";
+import backIcon from "./img/back.svg";
 
 export default function Main() {
   const pathname = useLocation().pathname;
-  const deckId = pathname.split("/")[pathname.split("/").length - 1];
+  const navigate = useNavigate();
+
   const LSM = new LocalStorageManager(CONSTANTS.KEYID, CONSTANTS.SETTINGID);
+  const DM = new DateManager();
+  const AM = new AnimationManager();
 
   const [data, setData] = useState(LSM.getAllDecks);
   const [settings, setSettings] = useState(LSM.getAllSettings);
   const [selectedCard, setSelectedCard] = useState<FlashCard>();
+
+  // const pageName = pathname.split("/")[1];
+  const pageId = pathname.split("/")[2];
+  const POINTLIMIT = settings.point_limit;
+  const BLOCKTIME = settings.block_time;
+  const RETENTIONRATE = settings.retentionRate;
 
   const handleBack = () => {
     window.history.back();
@@ -75,19 +89,19 @@ export default function Main() {
     setSettings(newSettings);
     LSM.updateSettings = newSettings;
   };
-  const handleExportDeck = () => {};
+
   return (
     <div className="frosted-glass">
       <div className="popup-window">
         {pathname !== "/" && (
           <button className="back-button" onClick={handleBack}>
-            <FontAwesomeIcon icon={faArrowLeft} />
+            <img src={backIcon} alt="" />
           </button>
         )}
         {pathname !== "/settings" && (
           <NavLink to={"settings"}>
             <button className="menu-button">
-              <FontAwesomeIcon icon={faCog} />
+              <img src={cogIcon} alt="" />
             </button>
           </NavLink>
         )}
@@ -113,21 +127,26 @@ export default function Main() {
               <>
                 <Route
                   key={`deckpage-${deck.id}`}
-                  path={deck.id}
+                  path={`deck/${deck.id}`}
                   element={
                     <DeckPage
                       hide_edit_cards={settings.hide_edit_cards}
                       deck={deck}
+                      POINTLIMIT={POINTLIMIT}
                     />
                   }
                 />
                 <Route
                   key={`flashcards-${deck.id}`}
-                  path={`/flashcards/${deck.id}`}
+                  path={`flashcards/${deck.id}`}
                   element={
                     <FlashCardsPage
                       deck={deck}
                       updateData={handleUpdateDeckById}
+                      POINTLIMIT={POINTLIMIT}
+                      BLOCKTIME={BLOCKTIME}
+                      RETENTIONRATE={RETENTIONRATE}
+                      getDifference={DM.getDifference}
                     />
                   }
                 />
@@ -141,22 +160,28 @@ export default function Main() {
                       selectCardToEdit={(cardToEdit) =>
                         setSelectedCard(cardToEdit)
                       }
+                      navigate={navigate}
                     />
                   }
                 />
               </>
             );
           })}
-          <Route path="all-cards" element={<AllCardsPage data={data} />} />
           <Route
             path="new-deck"
-            element={<NewDeckPage updateData={handleNewDeck} />}
+            element={
+              <NewDeckPage updateData={handleNewDeck} navigate={navigate} />
+            }
           />
 
           <Route
             path="new-card/*"
             element={
-              <NewCardPage updateData={handleNewCards} deckId={deckId} />
+              <NewCardPage
+                updateData={handleNewCards}
+                deckId={pageId}
+                animationManager={AM}
+              />
             }
           />
           <Route
@@ -175,7 +200,8 @@ export default function Main() {
                 <EditCardPage
                   updateCard={handleUpdateCard}
                   card={selectedCard}
-                  deckId={deckId}
+                  deckId={pageId}
+                  formatDate={DM.getFormattedDate}
                 />
               }
             />

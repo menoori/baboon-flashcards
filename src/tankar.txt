@@ -17,3 +17,7 @@ Those words will not be visible anymore
 
 Sort so that words with least points in deck are always in front
 
+Add block time to not allow user to get points within a certain time span
+
+how to make sure routes are unmouted correctly
+borde ha en localstorage manager

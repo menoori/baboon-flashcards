@@ -1,24 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { FlashCardDeck } from "../interface/data_interface";
-import { CONSTANTS } from "../enums";
 
 interface DeckPageProps {
   deck: FlashCardDeck;
   hide_edit_cards: boolean;
+  POINTLIMIT: number;
 }
+
 export default function DeckPage(props: DeckPageProps) {
   return (
     <div className="deck-page popup-content">
       <h1>{props.deck.name}</h1>
       <div className="popup-container grid">
         <div className="grid-card inverse-color">
-          <div>No. Cards</div>
+          <h4>No. Cards</h4>
           <div>{props.deck.cards.length}</div>
         </div>
         <div className="grid-card inverse-color">
-          <div>Another Stat</div>
-          <div>543</div>
+          <h4>No. Learned Cards</h4>
+          <div>
+            {props.deck.cards.reduce(
+              (acc, nV) => (nV.points >= props.POINTLIMIT ? ++acc : acc),
+              0
+            )}
+          </div>
         </div>
       </div>
       <div className="button-container">

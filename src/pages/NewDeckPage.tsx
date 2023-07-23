@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import { FlashCard, FlashCardDeck } from "../interface/data_interface";
 import { v4 as UUID } from "uuid";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 
 interface FormData {
   deck_name: string;
@@ -9,6 +9,7 @@ interface FormData {
 }
 interface NewDeckPageProps {
   updateData: (deckdata: FlashCardDeck) => void;
+  navigate: NavigateFunction;
 }
 
 export default function NewDeckPage(props: NewDeckPageProps) {
@@ -16,7 +17,6 @@ export default function NewDeckPage(props: NewDeckPageProps) {
     deck_name: "",
     data_string_set: "",
   });
-  const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ export default function NewDeckPage(props: NewDeckPageProps) {
       cards: data,
     } as FlashCardDeck;
     props.updateData(deckdata);
-    navigate({ pathname: "/" });
+    props.navigate({ pathname: "/" });
   };
 
   const handleChange = (

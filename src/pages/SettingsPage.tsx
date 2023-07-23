@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Settings } from "../interface/settings_interface";
-import { FlashCardDeck } from "../interface/data_interface";
 
 interface SettingsPageProps {
   settings: Settings;
@@ -25,8 +24,6 @@ export default function SettingsPage(props: SettingsPageProps) {
   };
 
   const handleChangeLimit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-
     setSettings({ ...settings, point_limit: Number(e.target.value) });
   };
 

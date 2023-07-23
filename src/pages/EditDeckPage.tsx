@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { LocalStorageManager } from "../manager/LocalStorageManager";
+import { NavigateFunction } from "react-router-dom";
 import { FlashCard, FlashCardDeck } from "../interface/data_interface";
-import { CONSTANTS } from "../enums";
 
 interface EditDeckPageProps {
   updateData: (updatedDeck: FlashCardDeck) => void;
   deck: FlashCardDeck;
   selectCardToEdit: (cardToEdit: FlashCard) => void;
+  navigate: NavigateFunction;
 }
 export default function EditDeckPage(props: EditDeckPageProps) {
-  const navigate = useNavigate();
   const [selectedCards, setSelectedCards] = useState(
     props.deck.cards.map((card) => {
       return { cardId: card.id, isSelected: false };
@@ -36,7 +34,7 @@ export default function EditDeckPage(props: EditDeckPageProps) {
     )[0];
 
     props.selectCardToEdit(cardToEdit);
-    navigate({
+    props.navigate({
       pathname: `/edit-card/${selectedCards[0].cardId}/${props.deck.id}`,
     });
   };
@@ -67,7 +65,7 @@ export default function EditDeckPage(props: EditDeckPageProps) {
           return (
             <button
               key={card.id}
-              className="grid-card"
+              className="grid-card inverse-color"
               onClick={() => handleSelectedCard(card.id)}
               id={card.id}
             >

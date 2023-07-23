@@ -3,6 +3,10 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+
+  & a {
+    text-decoration: none;
+  }
 }
 
 .background-image {
@@ -35,6 +39,8 @@
   position: relative;
   height: 30rem;
   min-width: 30rem;
+  width: 80vw;
+  max-width: 40rem;
   // overflow-y: scroll;
 
   @media only screen and (max-width: 37.5em) {
@@ -58,6 +64,7 @@
     height: 100%;
   }
   .popup-container {
+    overflow-y: scroll;
     flex-grow: 1;
   }
   .grid {
@@ -72,9 +79,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
 
-      padding-block: 0.5rem;
+      padding: 1rem;
 
       background-color: #2b4162;
       border-radius: 5px;
@@ -89,20 +96,38 @@
         color: black;
         border: 1px solid #2b4162;
       }
-
+      h4 {
+        color: #c83e4d;
+      }
       & > * {
         margin-block: 0.5rem;
+      }
+      & > p {
+        margin-block: 0.2rem;
       }
     }
     button.grid-card {
       border: 2px solid #2b4162;
       cursor: pointer;
+      width: 100%;
+      height: 100%;
 
       transition: all 0.2s ease-in;
 
-      &:hover {
+      &:hover:not(.inverse-color) {
         border: 2px solid white;
         filter: hue-rotate(20deg);
+      }
+      &.inverse-color:hover {
+        background-color: #2b4162;
+        color: white;
+        h4 {
+          color: white;
+        }
+      }
+      &.inverse-color:active {
+        background-color: #c83e4d;
+        color: white;
       }
       &.selected {
         background-color: #c83e4d !important;
@@ -229,6 +254,7 @@
 
 .button-container {
   display: flex;
+  align-items: stretch;
   // grid-template-columns: repeat(3, 1fr);
   margin-block: 2rem 0rem;
   gap: 1rem;
@@ -236,13 +262,14 @@
   & button,
   & a {
     width: 100%;
+    height: 100%;
   }
 
   button {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 5px;
-    transition: filter 0.3s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -265,10 +292,10 @@
 
   button:hover {
     filter: brightness(90%);
+    transform: translateY(-2px);
   }
 
   button:active {
-    background-color: #ccc;
     transform: translateY(1px);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   }
@@ -283,17 +310,19 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  padding: 10px;
-  font-size: 10px;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  font-size: 20px;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
 
-  background-color: #2b4162;
-  color: #fff;
+  color: #2b4162;
   border: none;
+  background-color: transparent;
+  img {
+    width: 100%;
+  }
 }
 .back-button {
   left: 1rem;

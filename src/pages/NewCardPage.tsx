@@ -6,6 +6,7 @@ import { FlashCard } from "../interface/data_interface";
 interface NewCardPageProps {
   deckId: string;
   updateData: (flashCard: FlashCard, deckId: string) => void;
+  animationManager: AnimationManager;
 }
 interface FormData {
   front: string;
@@ -21,17 +22,16 @@ export default function NewCardPage(props: NewCardPageProps) {
   const [formData, setFormData] = useState<FormData>(emptyForm);
   const [noNewCards, setNoNewCards] = useState(0);
 
-  const AM = new AnimationManager();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { front, back, alternative } = formData;
     if (front.trim() === "") {
       const element = document.getElementById("front");
-      AM.animateElement(element!, "shakeHorError");
+      props.animationManager.animateElement(element!, "shakeHorError");
       return;
     } else if (back.trim() === "") {
       const element = document.getElementById("back");
-      AM.animateElement(element!, "shakeHorError");
+      props.animationManager.animateElement(element!, "shakeHorError");
       return;
     }
     try {
