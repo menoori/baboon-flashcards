@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { FlashCardDeck } from "../interface/data_interface";
 
-interface EditOverViewPageProps {
+interface EditOverviewPageProps {
   data: FlashCardDeck[];
   updateData: (filteredDecks: FlashCardDeck[]) => void;
 }
-export default function EditOverviewPage(props: EditOverViewPageProps) {
+export default function EditOverviewPage(props: EditOverviewPageProps) {
   const [selectedDecks, setSelectedDecks] = useState(
     props.data.map((deck) => {
       return { deckId: deck.id, isSelected: false };

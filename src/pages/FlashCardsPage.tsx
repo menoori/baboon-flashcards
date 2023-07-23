@@ -83,7 +83,6 @@ export default function FlashCardsPage(props: FlashCardsPageProps) {
       {cards.length > 0 ? (
         <div className="flashcard-clickable" onClick={() => setShowCard(true)}>
           <p>{cards[dataPosition].front}</p>
-          <em>{cards[dataPosition].points}</em>
           <p style={{ opacity: showCard ? "100%" : "0" }}>
             {cards[dataPosition].back}
           </p>
