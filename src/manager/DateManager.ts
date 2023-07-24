@@ -1,6 +1,4 @@
 export class DateManager {
-  constructor() {}
-
   getDifference(
     oldDate: number,
     newDate: number,
@@ -67,8 +65,6 @@ export class DateManager {
         return `${yearTwo}${month}${day}`;
       case "YYYY-MM-DD":
         return `${year}-${month}-${day}`;
-      case "YYYY-MM-DD":
-        return `${year}-${month}-${day} ${hours}:${minutes}`;
       case "YYMMDD hh:mm":
         return `${yearTwo}${month}${day} ${hours}:${minutes}`;
       case "YYMMDD hh:mm:ss":
