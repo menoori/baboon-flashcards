@@ -11,7 +11,7 @@ interface DeckPageProps {
 export default function DeckPage(props: DeckPageProps) {
   return (
     <div className="deck-page popup-content">
-      <h1>{props.deck.name}</h1>
+      <h1>{props.deck.name} sooo wow </h1>
       <div className="popup-container grid">
         <div className="grid-card inverse-color">
           <h4>No. Cards</h4>
