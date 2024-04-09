@@ -92,6 +92,7 @@ export default function Main() {
 
   return (
     <div className="frosted-glass">
+      hajsan
       <div className="popup-window">
         {pathname !== "/" && (
           <button className="back-button" onClick={handleBack}>
